@@ -63,6 +63,7 @@ socket.on("finish", (response) => {
   let data = response["response"];
   const img = ["gajah", "semut", "orang"];
   let i = 0;
+  // console.log(data);
   const waktuMulai = new Date().getTime();
   data.forEach((res) => {
     let imgComputer = document.querySelector(`.${res.name}`);
@@ -74,10 +75,13 @@ socket.on("finish", (response) => {
           imgComputer.setAttribute("src", "assets/img/" + res.cus + ".png");
           getHasil(data);
           return;
-      }
-      if (i == img.length) i = 0;
-    }, 100);
-  });
+        }
+        if (i == img.length) i = 0;
+      }, 100);
+    });
+    setTimeout(() => {
+        location.reload();
+    }, 15000);
 });
 
 function makeid(length) {
@@ -144,7 +148,7 @@ function getHasil(data) {
     } else {
       info.innerHTML = "SERI!";
     }
-  } else if (data[0].cus == "manusia" && data[1].cus == "manusia") {
+  } else if (data[0].cus == "orang" && data[1].cus == "orang") {
     if (data[0].name == name) {
       info.innerHTML = "SERI!";
     } else {
